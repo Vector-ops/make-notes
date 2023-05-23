@@ -1,3 +1,3 @@
 # notes-api
-My first restful API. It is a simple API to write and store notes that can perform all CRUD operations.
-I have used MongoDB as database to store the data.
+Notes-api is a simple Restful API to write and store notes that can perform all CRUD operations.
+It uses MongoDB to store the notes.
