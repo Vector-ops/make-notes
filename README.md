@@ -4,22 +4,24 @@ What started as just a backend api is now a full fledged web application.
 
 ## Project setup
 
+Clone the repo in your local machine and follow these steps.
+
 ### Frontend 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+#### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+#### Lints and fixes files
 ```
 npm run lint
 ```
@@ -29,12 +31,12 @@ npm run lint
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Compiles and hot-reloads for development
 ```
 npm run dev
 ```
 
-### Start server
+#### Start server
 ```
 npm start
 ```
