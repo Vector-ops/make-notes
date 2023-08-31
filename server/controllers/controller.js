@@ -1,6 +1,6 @@
 const Note = require("../schema/schema");
 const asyncWrapper = require("../middleware/asyncWrapper");
-const { CustomError, customError } = require("../error/all-route-catch");
+const { customError } = require("../error/all-route-catch");
 
 const getAllNotes = asyncWrapper(async (req, res) => {
   const notes = await Note.find();
