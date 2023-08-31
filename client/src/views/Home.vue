@@ -2,7 +2,7 @@
   <div class="container">
     <Header
       @btn-click="addNote()"
-      :title="'Make Notes'"
+      :title="'NoteStack'"
       :newNote="newNote"
       :color="this.color"
     />

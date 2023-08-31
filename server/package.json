@@ -1,5 +1,5 @@
 {
-  "name": "write-notes",
+  "name": "note-stack-api",
   "version": "1.0.0",
   "description": "A working model of Google's keep notes application",
   "main": "server.js",
