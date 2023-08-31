@@ -1,6 +1,6 @@
 <template>
-  <div v-for="note in notes" :key="note.id">
-    <Note :title="note.title" :date="note.date" />
+  <div v-for="note in notes" :key="note._id">
+    <Note @note-click="$emit('note-click', note._id)" :note="note" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
   props: {
     notes: Array,
   },
+  emits: ["note-click"],
 };
 </script>
 

@@ -1,71 +1,68 @@
 <template>
   <div class="container">
-    <Header :title="'Make Notes'" />
-    <div class="notes-container">
-      <Notes :notes="this.notes" />
+    <Header
+      @btn-click="addNote()"
+      :title="'Make Notes'"
+      :newNote="newNote"
+      :color="this.color"
+    />
+    <div
+      class="multi-note"
+      :style="!this.toggleNewNote ? '' : 'display: flex; flex-direction:row;'"
+    >
+      <div class="notes-container">
+        <Notes @note-click="showSingleNote" :notes="this.notes" />
+      </div>
+      <AddNote :note="this.note" v-show="this.toggleNewNote" />
     </div>
   </div>
 </template>
 
 <script>
+const axios = require("axios");
 import Header from "../components/Header.vue";
 import Notes from "../components/Notes.vue";
+import AddNote from "../components/AddNote.vue";
 export default {
   name: "Home",
   components: {
     Header,
     Notes,
+    AddNote,
   },
   data() {
     return {
       notes: [],
+      note: {},
+      newNote: "New Note",
+      color: "#2c3e50",
+      toggleNewNote: false,
     };
   },
-  created() {
-    this.notes = [
-      {
-        id: "1",
-        title: "This is first note",
-        date: "2 Aug, 2023",
-        content: "This is the first note",
-      },
-      {
-        id: "2",
-        title: "This is second note",
-        date: "2 Aug, 2023",
-        content: "This is the second note",
-      },
-      {
-        id: "3",
-        title: "This is third note",
-        date: "2 Aug, 2023",
-        content: "This is the third note",
-      },
-      {
-        id: "4",
-        title: "This is fourth note",
-        date: "2 Aug, 2023",
-        content: "This is the fourth note",
-      },
-      {
-        id: "4",
-        title: "This is fourth note",
-        date: "2 Aug, 2023",
-        content: "This is the fourth note",
-      },
-      {
-        id: "4",
-        title: "This is fourth note",
-        date: "2 Aug, 2023",
-        content: "This is the fourth note",
-      },
-      {
-        id: "4",
-        title: "This is fourth note",
-        date: "2 Aug, 2023",
-        content: "This is the fourth note",
-      },
-    ];
+  methods: {
+    addNote() {
+      this.toggleNewNote = !this.toggleNewNote;
+      if (this.toggleNewNote) {
+        this.newNote = "Save";
+        this.color = "green";
+      } else {
+        this.newNote = "New Note";
+        this.color = "#2c3e50";
+      }
+    },
+    showSingleNote(id) {
+      this.$router.push({
+        name: "note",
+        params: { noteId: id },
+      });
+    },
+    async fetchNotes() {
+      const res = await axios.get("http://localhost:3000/api/v1/notes");
+      return res.data.notes;
+    },
+  },
+  async created() {
+    this.notes = await this.fetchNotes();
   },
 };
 </script>
@@ -75,15 +72,16 @@ export default {
   background: lightgray;
 }
 .notes-container {
-  max-height: 83.3dvh;
+  max-height: 80.6dvh;
   overflow-y: scroll;
+  min-width: 50vw;
 }
 
 .container {
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .container::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }
 </style>

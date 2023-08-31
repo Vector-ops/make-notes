@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3>{{ title }}</h3>
+  <div @click="$emit('note-click')">
+    <h3>{{ note.title }}</h3>
     <p>{{ date }}</p>
   </div>
 </template>
@@ -9,8 +9,16 @@
 export default {
   name: "Note",
   props: {
-    title: String,
-    date: String,
+    note: Object,
+  },
+  data() {
+    return {
+      date: "",
+    };
+  },
+  created() {
+    let rawDate = new Date(this.note.created_at);
+    this.date = rawDate.toDateString();
   },
 };
 </script>

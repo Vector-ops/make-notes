@@ -8,10 +8,10 @@ const getAllNotes = asyncWrapper(async (req, res) => {
 });
 
 const getSingleNote = asyncWrapper(async (req, res, next) => {
-  const noteTitle = req.params.title;
-  const notes = await Note.findOne({ title: noteTitle });
+  const noteId = req.params.noteId;
+  const notes = await Note.findById(noteId);
   if (!notes) {
-    return next(customError(404, `No notes with title: ${noteTitle}`));
+    return next(customError(404, `No notes with id: ${noteId}`));
   }
   res.status(200).json({ notes });
 });
@@ -23,11 +23,10 @@ const createNotes = asyncWrapper(async (req, res) => {
 });
 
 const updateNotes = asyncWrapper(async (req, res, next) => {
-  const noteTitle = req.params.title;
-  const updateTitle = req.body.title;
-  const updateBody = req.body.body;
-  const notes = await Note.findOneAndUpdate(
-    { title: noteTitle },
+  const noteId = req.params.noteId;
+  const { updateTitle, updateBody } = req.body;
+  const notes = await Note.findByIdAndUpdate(
+    { id: noteId },
     {
       title: updateTitle,
       body: updateBody,
@@ -38,7 +37,7 @@ const updateNotes = asyncWrapper(async (req, res, next) => {
     }
   );
   if (!notes) {
-    return next(customError(404, `No notes with title: ${noteTitle}`));
+    return next(customError(404, `No notes with title: ${noteId}`));
   }
   res.status(200).json({ notes });
 });

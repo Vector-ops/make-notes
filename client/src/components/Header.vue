@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <Button :text="'New Note'" :color="'#2c3e50'" />
+    <Button @btn-click="$emit('btn-click')" :text="newNote" :color="color" />
   </header>
   <div class="line"></div>
 </template>
@@ -15,7 +15,10 @@ export default {
   },
   props: {
     title: String,
+    newNote: String,
+    color: String,
   },
+  emits: ["btn-click"],
 };
 </script>
 

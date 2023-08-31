@@ -1,6 +1,5 @@
 <template>
   <footer>
-    <div class="line"></div>
     <div class="github">
       <img src="../assets/github-mark.png" alt="" />
       <a href="https://github.com/Vector-ops" target="_blank">Visit Github</a>
@@ -16,14 +15,16 @@ export default {
 
 <style scoped>
 footer {
+  border-top: 3px solid gray;
   display: flex;
   flex-direction: column;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   min-height: 10vh;
   min-width: 100%;
   gap: 1em;
   justify-content: center;
+  background: lightgray;
 }
 
 .github {
@@ -45,9 +46,5 @@ a {
 a:link,
 a:visited {
   color: #2c3e50;
-}
-
-.line {
-  border-bottom: 2px solid gray;
 }
 </style>

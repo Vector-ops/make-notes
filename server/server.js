@@ -5,11 +5,13 @@ require("dotenv").config();
 const noteRoute = require("./routes/routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/error-handler");
+const cors = require("cors");
 
 //port
 const PORT = process.env.PORT || 3000;
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1/notes", noteRoute);
 app.use(notFound);
