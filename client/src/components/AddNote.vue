@@ -2,10 +2,16 @@
   <div class="new-note">
     <div class="date">{{ this.date }}</div>
     <div class="line"></div>
-    <form action="submit">
-      <input v-model="updateTitle" type="text" :placeholder="this.title" />
+    <form @submit.prevent="submitForm">
+      <input
+        v-model="updateTitle"
+        @input="updateNote"
+        type="text"
+        :placeholder="this.title"
+      />
       <textarea
         v-model="updateBody"
+        @input="updateNote"
         rows="15"
         cols="45vw"
         type="text"
@@ -20,22 +26,17 @@ export default {
   name: "AddNote",
   props: {
     note: Object,
+    btnClick: Boolean,
   },
+  emits: ["update-note"],
   data() {
     return {
       date: "",
       title: "",
       body: "",
-      updateTitle: "",
       updateBody: "",
+      updateTitle: "",
     };
-  },
-  watch: {
-    updateTitle(value) {
-      this.updateTitle = value;
-      console.log(this.updateTitle);
-      this.title = value;
-    },
   },
   created() {
     this.$watch(
@@ -46,7 +47,17 @@ export default {
       { immediate: true }
     );
   },
+  updated() {
+    this.setNote();
+    if (this.btnClick) {
+      this.updateTitle = "";
+      this.updateBody = "";
+    }
+  },
   methods: {
+    submitForm(e) {
+      e.preventDefault();
+    },
     setNote() {
       const rawDate = new Date(this.note.created_at);
       this.date = this.note.created_at
@@ -54,6 +65,13 @@ export default {
         : Date().split("GMT")[0];
       this.title = this.note.title ? this.note.title : "Title";
       this.body = this.note.body ? this.note.body : "Body";
+    },
+    updateNote() {
+      let updateNote = {
+        title: this.updateTitle,
+        body: this.updateBody,
+      };
+      this.$emit("update-note", updateNote);
     },
   },
 };

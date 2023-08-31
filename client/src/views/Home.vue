@@ -13,7 +13,11 @@
       <div class="notes-container">
         <Notes @note-click="showSingleNote" :notes="this.notes" />
       </div>
-      <AddNote :note="this.note" v-show="this.toggleNewNote" />
+      <AddNote
+        @update-note="updateNote"
+        :note="this.note"
+        v-show="this.toggleNewNote"
+      />
     </div>
   </div>
 </template>
@@ -59,6 +63,9 @@ export default {
     async fetchNotes() {
       const res = await axios.get("http://localhost:3000/api/v1/notes");
       return res.data.notes;
+    },
+    updateNote(updatedNote) {
+      console.log(updatedNote);
     },
   },
   async created() {

@@ -7,7 +7,11 @@
       newNote="Edit"
     />
     <router-link to="/">Home</router-link>
-    <AddNote :note="this.note" />
+    <AddNote
+      @update-note="recieveNote"
+      :note="this.note"
+      :btnClick="btnClick"
+    />
   </div>
 </template>
 <script>
@@ -15,7 +19,7 @@ import axios from "axios";
 import Header from "@/components/Header.vue";
 import AddNote from "@/components/AddNote.vue";
 export default {
-  name: "Single Note",
+  name: "SingleNotePage",
   components: {
     Header,
     AddNote,
@@ -24,15 +28,31 @@ export default {
     return {
       note: {},
       color: "#2c3e50",
+      updatedNote: {},
+      btnClick: false,
     };
   },
   methods: {
     editNote() {
-      console.log("first");
+      this.btnClick = true;
+      this.updateNote();
     },
     async getNote(id) {
       const res = await axios.get(`http://localhost:3000/api/v1/notes/${id}`);
       return res.data.notes;
+    },
+    recieveNote(updatedNote) {
+      this.updatedNote = updatedNote;
+    },
+    updateNote() {
+      this.note.title = this.updatedNote.title
+        ? this.updatedNote.title
+        : this.note.title;
+      this.note.body = this.updatedNote.body
+        ? this.updatedNote.body
+        : this.note.body;
+
+      // console.log(this.updatedNote);
     },
   },
   async created() {
