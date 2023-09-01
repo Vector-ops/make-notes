@@ -24,12 +24,12 @@ const createNotes = asyncWrapper(async (req, res) => {
 
 const updateNotes = asyncWrapper(async (req, res, next) => {
   const noteId = req.params.noteId;
-  const { updateTitle, updateBody } = req.body;
+  const { title, body } = req.body;
   const notes = await Note.findByIdAndUpdate(
-    { id: noteId },
+    noteId,
     {
-      title: updateTitle,
-      body: updateBody,
+      title: title,
+      body: body,
     },
     {
       new: true,

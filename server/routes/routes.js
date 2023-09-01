@@ -13,7 +13,7 @@ router.route("/").get(getAllNotes).post(createNotes);
 router
   .route("/:noteId")
   .get(getSingleNote)
-  .patch(updateNotes)
+  .put(updateNotes)
   .delete(deleteNotes);
 
 module.exports = router;
