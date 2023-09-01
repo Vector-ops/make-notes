@@ -42,17 +42,19 @@ export default {
       return res.data.notes;
     },
     recieveNote(updatedNote) {
-      this.updatedNote = updatedNote;
-    },
-    updateNote() {
-      this.note.title = this.updatedNote.title
-        ? this.updatedNote.title
+      this.updatedNote.title = updatedNote.title
+        ? updatedNote.title
         : this.note.title;
-      this.note.body = this.updatedNote.body
-        ? this.updatedNote.body
+      this.updatedNote.body = updatedNote.body
+        ? updatedNote.body
         : this.note.body;
-
-      // console.log(this.updatedNote);
+    },
+    async updateNote() {
+      const res = await axios.put(
+        `http://localhost:3000/api/v1/notes/${this.note._id}`,
+        this.updatedNote
+      );
+      this.note = res.data.notes;
     },
   },
   async created() {

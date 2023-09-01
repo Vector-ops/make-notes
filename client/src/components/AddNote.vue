@@ -59,19 +59,24 @@ export default {
       e.preventDefault();
     },
     setNote() {
-      const rawDate = new Date(this.note.created_at);
-      this.date = this.note.created_at
-        ? rawDate.toDateString()
-        : Date().split("GMT")[0];
-      this.title = this.note.title ? this.note.title : "Title";
-      this.body = this.note.body ? this.note.body : "Body";
+      if (this.note) {
+        const rawDate = new Date(this.note.created_at);
+        this.date = rawDate.toDateString();
+        this.title = this.note.title;
+        this.body = this.note.body;
+      } else {
+        this.date = Date().split("GMT")[0];
+        this.title = "Title";
+        this.body = "Body";
+      }
     },
     updateNote() {
-      let updateNote = {
+      let updatedNote = {
         title: this.updateTitle,
         body: this.updateBody,
       };
-      this.$emit("update-note", updateNote);
+      console.log(this.btnClick);
+      this.$emit("update-note", updatedNote);
     },
   },
 };

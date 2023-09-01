@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <Header
-      @btn-click="addNote()"
+      @btn-click="toggleAddNewNote()"
       :title="'NoteStack'"
-      :newNote="newNote"
+      :newNote="btnName"
       :color="this.color"
     />
     <div
@@ -13,11 +13,7 @@
       <div class="notes-container">
         <Notes @note-click="showSingleNote" :notes="this.notes" />
       </div>
-      <AddNote
-        @update-note="updateNote"
-        :note="this.note"
-        v-show="this.toggleNewNote"
-      />
+      <AddNote @update-note="recieveNewNote" v-show="this.toggleNewNote" />
     </div>
   </div>
 </template>
@@ -37,21 +33,24 @@ export default {
   data() {
     return {
       notes: [],
-      note: {},
-      newNote: "New Note",
+      newNote: {},
+      btnName: "New Note",
       color: "#2c3e50",
       toggleNewNote: false,
+      saveNote: false,
     };
   },
   methods: {
-    addNote() {
+    toggleAddNewNote() {
       this.toggleNewNote = !this.toggleNewNote;
       if (this.toggleNewNote) {
-        this.newNote = "Save";
+        this.btnName = "Save";
         this.color = "green";
       } else {
-        this.newNote = "New Note";
+        this.btnName = "New Note";
         this.color = "#2c3e50";
+        this.saveNote = true;
+        this.addNewNote();
       }
     },
     showSingleNote(id) {
@@ -64,8 +63,18 @@ export default {
       const res = await axios.get("http://localhost:3000/api/v1/notes");
       return res.data.notes;
     },
-    updateNote(updatedNote) {
-      console.log(updatedNote);
+    recieveNewNote(newNote) {
+      this.newNote = newNote;
+    },
+    async addNewNote() {
+      if (this.saveNote) {
+        const res = await axios.post(
+          "http://localhost:3000/api/v1/notes",
+          this.newNote
+        );
+        this.notes.push(res.data.notes);
+        this.saveNote = false;
+      }
     },
   },
   async created() {
