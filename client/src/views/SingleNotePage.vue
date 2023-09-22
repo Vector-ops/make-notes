@@ -34,7 +34,8 @@ export default {
   },
   methods: {
     editNote() {
-      this.btnClick = true;
+      console.log({ slp: this.btnClick });
+      this.btnClick = !this.btnClick;
       this.updateNote();
     },
     async getNote(id) {

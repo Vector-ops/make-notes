@@ -2,7 +2,7 @@
   <div class="new-note">
     <div class="date">{{ this.date }}</div>
     <div class="line"></div>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent>
       <input
         v-model="updateTitle"
         @input="updateNote"
@@ -47,17 +47,7 @@ export default {
       { immediate: true }
     );
   },
-  updated() {
-    this.setNote();
-    if (this.btnClick) {
-      this.updateTitle = "";
-      this.updateBody = "";
-    }
-  },
   methods: {
-    submitForm(e) {
-      e.preventDefault();
-    },
     setNote() {
       if (this.note) {
         const rawDate = new Date(this.note.created_at);
@@ -70,12 +60,12 @@ export default {
         this.body = "Body";
       }
     },
-    updateNote() {
+    updateNote(e) {
+      this.setNote;
       let updatedNote = {
         title: this.updateTitle,
         body: this.updateBody,
       };
-      console.log(this.btnClick);
       this.$emit("update-note", updatedNote);
     },
   },
