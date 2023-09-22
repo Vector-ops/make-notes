@@ -7,6 +7,10 @@ What started as just a backend api is now a full fledged web application.
 Clone the repo in your local machine and follow these steps.
 
 ### Frontend 
+``` 
+cd client
+```
+
 ```
 npm install
 ```
@@ -27,6 +31,10 @@ npm run lint
 ```
 
 ### Backend
+``` 
+cd server
+```
+
 ```
 npm install
 ```
