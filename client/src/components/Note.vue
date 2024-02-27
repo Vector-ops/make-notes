@@ -56,6 +56,7 @@ export default {
 	gap: 1em;
 	height: 100%;
 	width: 98%;
+	cursor: pointer;
 }
 
 .btn {

@@ -16,6 +16,8 @@
 			v-if="!this.hasError"
 			@update-note="recieveNote"
 			:note="this.note"
+			:show="true"
+			@delete-click="deleteNote"
 		/>
 	</div>
 </template>
@@ -90,6 +92,19 @@ export default {
 					}
 				);
 				this.note = res.data.notes;
+			} catch (error) {
+				this.hasError = true;
+			}
+		},
+		async deleteNote(noteId) {
+			try {
+				await axios.delete(
+					`http://localhost:5000/api/v1/notes/${noteId}`,
+					{
+						withCredentials: true,
+					}
+				);
+				this.$router.push({ name: "home" });
 			} catch (error) {
 				this.hasError = true;
 			}

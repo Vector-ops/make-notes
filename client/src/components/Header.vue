@@ -6,16 +6,15 @@
 				v-if="btnType === 'Home'"
 				:size="36"
 				style="color: '#2c3e50'"
-				weight="fill"
+				weight="duotone"
 				@click="$emit('home-click')"
 			/>
-			<ph-plus-square
-				v-else
+			<ph-plus-square v-else :size="36" @click="$emit('new-click')" />
+			<ph-sign-out
 				:size="36"
-				weight="bold"
-				@click="$emit('new-click')"
+				weight="duotone"
+				@click="$emit('signout')"
 			/>
-			<ph-sign-out :size="36" weight="bold" @click="$emit('signout')" />
 		</div>
 	</header>
 	<div class="line"></div>
@@ -40,6 +39,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1.1em;
+	user-select: none;
 }
 
 h1 {

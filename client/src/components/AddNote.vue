@@ -3,10 +3,20 @@
 		<div class="headline">
 			<div class="date">{{ this.date }}</div>
 			<div class="buttons">
-				<button class="btn cancel" v-on:click="clearForm">
-					Cancel
-				</button>
-				<button class="btn save" v-on:click="updateNote">Save</button>
+				<ph-trash
+					v-if="show"
+					:size="32"
+					weight="duotone"
+					class="btn"
+					@click="$emit('delete-click', this.note._id)"
+				/>
+				<ph-x :size="32" class="btn" v-on:click="clearForm" />
+				<ph-floppy-disk
+					:size="32"
+					class="btn"
+					weight="duotone"
+					v-on:click="updateNote"
+				/>
 			</div>
 		</div>
 		<div class="line"></div>
@@ -30,8 +40,12 @@ export default {
 	name: "AddNote",
 	props: {
 		note: Object,
+		show: {
+			type: Boolean,
+			default: false,
+		},
 	},
-	emits: ["update-note", "close-form"],
+	emits: ["update-note", "close-form", "delete-click"],
 	setup() {
 		const title = ref("");
 		const body = ref("");
@@ -151,20 +165,6 @@ textarea {
 }
 
 .btn {
-	border-radius: 5px;
-	border: none;
-	height: 40px;
-	width: 60px;
-	font-size: small;
-	font-weight: bold;
-	color: whitesmoke;
-}
-
-.save {
-	background-color: #4caf50;
-}
-
-.cancel {
-	background-color: #f44336;
+	cursor: pointer;
 }
 </style>
