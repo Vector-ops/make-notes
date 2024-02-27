@@ -1,16 +1,17 @@
-const {CustomError} = require('../error/all-route-catch');
+const Joi = require("joi");
 
-const errorHandler = (err, req, res, next) =>{
-    if(err instanceof CustomError) {
-        return res.status(err.status).json({
-            status: err.status,
-            message: err.message
-        });
-    }
-    return res.status(500).json({
-        status:500,
-        msg:'Unable to retrieve data. Try again later'
-    });
-}
+const errorHandler = (err, req, res, next) => {
+	let status = err.status || 500;
+	let message = err.message || "Something went wrong";
+
+	if (Joi.isError(err)) {
+		status = 400;
+		message = err.details.map((err) => err.message).join(", ");
+	}
+	console.log(err);
+	return res.status(status).json({
+		message,
+	});
+};
 
 module.exports = errorHandler;
