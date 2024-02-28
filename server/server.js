@@ -26,13 +26,7 @@ const PORT = process.env.PORT || 5000;
 //middleware
 app.use(
 	cors({
-		origin: [
-			"https://note-stack-khaki.vercel.app",
-			"https://note-stack-og7zm28np-vector-ops.vercel.app",
-			"https://note-stack-git-main-vector-ops.vercel.app",
-			"https://note-stack-jtbp5azrm-vector-ops.vercel.app",
-			"https://note-stack-vector-ops.vercel.app",
-		],
+		origin: ["http://localhost:8080"],
 		credentials: true,
 	})
 );
@@ -45,9 +39,7 @@ app.use(
 		store: store,
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-			secure: true,
-			domain: ".vercel.app",
-			sameSite: "none",
+			secure: false,
 		},
 	})
 );
