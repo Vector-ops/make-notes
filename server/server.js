@@ -27,11 +27,11 @@ const PORT = process.env.PORT || 5000;
 app.use(
 	cors({
 		origin: [
-			"https://note-stack-khaki.vercel.app/",
-			"https://note-stack-og7zm28np-vector-ops.vercel.app/",
-			"https://note-stack-git-main-vector-ops.vercel.app/",
-			"https://note-stack-jtbp5azrm-vector-ops.vercel.app/",
-			"https://note-stack-vector-ops.vercel.app/",
+			"https://note-stack-khaki.vercel.app",
+			"https://note-stack-og7zm28np-vector-ops.vercel.app",
+			"https://note-stack-git-main-vector-ops.vercel.app",
+			"https://note-stack-jtbp5azrm-vector-ops.vercel.app",
+			"https://note-stack-vector-ops.vercel.app",
 		],
 		credentials: true,
 	})
