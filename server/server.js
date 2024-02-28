@@ -45,7 +45,7 @@ app.use(
 		store: store,
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-			secure: false,
+			secure: true,
 		},
 	})
 );
