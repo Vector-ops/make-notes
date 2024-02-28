@@ -46,6 +46,7 @@ app.use(
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
 			secure: true,
+			domain: ".vercel.app",
 		},
 	})
 );
