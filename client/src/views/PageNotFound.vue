@@ -28,9 +28,12 @@ export default {
 	methods: {
 		async signout() {
 			try {
-				await axios.get("http://localhost:5000/api/v1/auth/logout", {
-					withCredentials: true,
-				});
+				await axios.get(
+					`${process.env.VUE_APP_SERVER_URL}/auth/logout`,
+					{
+						withCredentials: true,
+					}
+				);
 				this.$router.push({ name: "login" });
 			} catch (error) {
 				this.hasError = true;

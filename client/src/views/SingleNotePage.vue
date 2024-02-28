@@ -43,9 +43,12 @@ export default {
 	methods: {
 		async signout() {
 			try {
-				await axios.get("http://localhost:5000/api/v1/auth/logout", {
-					withCredentials: true,
-				});
+				await axios.get(
+					`${process.env.VUE_APP_SERVER_URL}/auth/logout`,
+					{
+						withCredentials: true,
+					}
+				);
 				this.$router.push({ name: "login" });
 			} catch (error) {
 				this.hasError = true;
@@ -59,7 +62,7 @@ export default {
 		async getNote(id) {
 			try {
 				const res = await axios.get(
-					`http://localhost:5000/api/v1/notes/${id}`,
+					`${process.env.VUE_APP_SERVER_URL}/notes/${id}`,
 					{
 						withCredentials: true,
 					}
@@ -85,7 +88,7 @@ export default {
 		async updateNote() {
 			try {
 				const res = await axios.put(
-					`http://localhost:5000/api/v1/notes/${this.note._id}`,
+					`${process.env.VUE_APP_SERVER_URL}/notes/${this.note._id}`,
 					this.updatedNote,
 					{
 						withCredentials: true,
@@ -99,7 +102,7 @@ export default {
 		async deleteNote(noteId) {
 			try {
 				await axios.delete(
-					`http://localhost:5000/api/v1/notes/${noteId}`,
+					`${process.env.VUE_APP_SERVER_URL}/notes/${noteId}`,
 					{
 						withCredentials: true,
 					}

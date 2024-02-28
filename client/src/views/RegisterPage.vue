@@ -54,7 +54,7 @@ export default {
 		async register() {
 			try {
 				await axios.post(
-					"http://localhost:5000/api/v1/auth/register",
+					`${process.env.VUE_APP_SERVER_URL}/auth/register`,
 					{
 						name: this.name,
 						email: this.email,
