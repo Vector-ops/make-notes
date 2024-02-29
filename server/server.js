@@ -43,6 +43,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		store: store,
+		httpOnly: true,
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
 			secure: true,
